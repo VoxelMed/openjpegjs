@@ -54,6 +54,9 @@ jobs:
       - store_artifacts:
           path: ~/repo/dist
           destination: /
+      - store_artifacts:
+          path: ~/repo/build/CMAKEFILES
+          destination: /CMakefiles/
       # - run:
       #     name: Write NPM Token to ~/.npmrc
       #     command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
