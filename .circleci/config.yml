@@ -1,0 +1,68 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+
+defaults: &defaults
+  docker:
+    # Points to latest release
+    # https://github.com/emscripten-core/emscripten/releases
+    - image: trzeci/emscripten
+      environment:
+        # Enable colors in term
+        TERM: xterm
+        # Avoid warnings by switching to noninteractive
+        DEBIAN_FRONTEND: noninteractive
+        # This Dockerfile's base image has a non-root user with sudo access. Use the "remoteUser"
+        # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
+        # will be updated to match your local UID/GID (when using the dockerFile property).
+        # See https://aka.ms/vscode-remote/containers/non-root-user for details.
+        USERNAME: vscode
+        USER_UID: 1000
+        USER_GID: 1000 # $USER_UID
+  working_directory: ~/repo
+
+jobs:
+  BUILD:
+    <<: *defaults
+    steps:
+      - run:
+          name: Configure apt and install packages
+          command: |
+            apt-get update
+            #
+            # Install C++ tools
+            # apt-get -y install build-essential cmake cppcheck valgrind
+            apt-get -y install build-essential cppcheck valgrind
+            # version 3.17 of cmake
+            wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local
+            #
+            # [Optional] Update UID/GID if needed
+            if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then
+                groupmod --gid $USER_GID $USERNAME
+                usermod --uid $USER_UID --gid $USER_GID $USERNAME
+                chown -R $USER_UID:$USER_GID /home/$USERNAME;
+            fi
+            #
+            # Clean up
+            apt-get autoremove -y
+            apt-get clean -y
+            rm -rf /var/lib/apt/lists/*
+      - checkout
+      - run: bash build.sh
+      - store_artifacts:
+          path: ~/repo/dist
+          destination: /
+      # - run:
+      #     name: Write NPM Token to ~/.npmrc
+      #     command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+      # - run:
+      #     name: Publish package
+      #     command: npx semantic-release@17.0.4
+  # NPM_PUBLISH:
+  #   <<: *defaults
+  #   steps:
+
+# Orchestrate or schedule a set of jobs
+workflows:
+  build:
+    jobs:
+      - BUILD
