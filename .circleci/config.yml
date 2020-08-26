@@ -46,9 +46,7 @@ jobs:
             apt-get autoremove -y
             apt-get clean -y
             rm -rf /var/lib/apt/lists/*
-      # Checkout repo
       - checkout
-      # Checkout submodules
       - run: git submodule update --init
       - run: bash build.sh
       - store_artifacts:

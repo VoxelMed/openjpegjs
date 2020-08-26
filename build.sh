@@ -1,9 +1,10 @@
 #!/bin/sh
-#rm -rf build
 mkdir -p build
 #(cd build && emconfigure cmake -DCMAKE_BUILD_TYPE=Debug ..) &&
-(cd build && emconfigure cmake ..) &&
-# (cd build && emcmake make .) &&
+ls
+# (cd build && emconfigure cmake ..) &&
+(cd build && emcmake make ..) &&
+ls
 (cd build && emmake make VERBOSE=1 -j 16) &&
 cp ./build/extern/openjpeg/bin/openjpegjs.js ./dist && 
 cp ./build/extern/openjpeg/bin/openjpegjs.js.mem ./dist &&
