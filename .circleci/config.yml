@@ -5,7 +5,7 @@ defaults: &defaults
   docker:
     # Points to latest release
     # https://github.com/emscripten-core/emscripten/releases
-    - image: trzeci/emscripten:1.39.17-upstream
+    - image: trzeci/emscripten:1.39.4-ubuntu
       environment:
         # Enable colors in term
         TERM: xterm
