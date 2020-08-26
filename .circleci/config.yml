@@ -48,6 +48,7 @@ jobs:
             rm -rf /var/lib/apt/lists/*
       - checkout
       - run: git submodule update --init
+      - run: bash build-native.sh
       - run: bash build.sh
       - store_artifacts:
           path: ~/repo/dist
