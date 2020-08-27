@@ -13,7 +13,7 @@ version: 2.1
 defaults: &defaults
   docker:
     # Most likely package at time of initial commit?
-    - image: trzeci/emscripten:1.39.18-fastcomp
+    - image: trzeci/emscripten:1.39.18-upstream
       environment:
         # Enable colors in term
         TERM: xterm
