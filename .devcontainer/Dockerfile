@@ -8,9 +8,11 @@
 # -upstream (emscripten, clang 10)
 # -fastcomp (legacy emscripten, clang 6)
 # -ubuntu 
-FROM trzeci/emscripten:1.39.17-upstream
+FROM trzeci/emscripten:1.39.4-fastcomp
 # 1.39.16 --> ~ May 20th (GitHub)
 # 1.39.4 --> ~ May 20th (Docker Hub)
+# https://github.com/trzecieu/emscripten-docker/issues/68
+# In may, `:latest` pointed to fastcomp
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
