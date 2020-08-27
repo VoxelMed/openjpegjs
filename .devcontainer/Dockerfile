@@ -4,7 +4,13 @@
 #-------------------------------------------------------------------------------------------------------------
 
 #FROM mcr.microsoft.com/vscode/devcontainers/base:0-debian-9
-FROM trzeci/emscripten
+# :latest
+# -upstream (emscripten, clang 10)
+# -fastcomp (legacy emscripten, clang 6)
+# -ubuntu 
+FROM trzeci/emscripten:1.39.17-upstream
+# 1.39.16 --> ~ May 20th (GitHub)
+# 1.39.4 --> ~ May 20th (Docker Hub)
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,7 +27,6 @@ ARG USER_GID=$USER_UID
 RUN apt-get update \
     #
     # Install C++ tools
-    #&& apt-get -y install build-essential cmake cppcheck valgrind \
     && apt-get -y install build-essential cppcheck valgrind kcachegrind \
     # version 3.17 of cmake
     && wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local \
