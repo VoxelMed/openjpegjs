@@ -31,7 +31,7 @@ RUN apt-get update \
     # Install C++ tools
     && apt-get -y install build-essential cppcheck valgrind kcachegrind \
     # version 3.17 of cmake
-    && wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local \
+    && wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.4-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local \
     # sudo
     && apt-get -y install sudo \
     #

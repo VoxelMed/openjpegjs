@@ -13,7 +13,7 @@ version: 2.1
 defaults: &defaults
   docker:
     # Most likely package at time of initial commit?
-    - image: trzeci/emscripten:1.39.4-fastcomp
+    - image: trzeci/emscripten:1.39.18-fastcomp
       environment:
         # Enable colors in term
         TERM: xterm
@@ -42,7 +42,7 @@ jobs:
             # apt-get -y install zlib1g-dev liblcms2-dev  libtiff-dev libpng-dev libz-dev
             
             # version 3.17 of cmake
-            wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.0-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local
+            wget -qO- "https://cmake.org/files/v3.17/cmake-3.17.4-Linux-x86_64.tar.gz" | tar --strip-components=1 -xz -C /usr/local
             
             # [Optional] Update UID/GID if needed
             if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then
