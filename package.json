@@ -1,0 +1,30 @@
+{
+  "name": "@voxelmed/openjpegjs",
+  "version": "1.0.0",
+  "description": "JS/WebAssembly build of [OpenJPEG](https://github.com/uclouvain/openjpeg)",
+  "main": "dist/openjpegjs.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VoxelMed/openjpegjs.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VoxelMed/openjpegjs/issues"
+  },
+  "homepage": "https://github.com/VoxelMed/openjpegjs#readme",
+  "files": [
+    "package.json",
+    "README.md",
+    "dist/"
+  ]
+}
